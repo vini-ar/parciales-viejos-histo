@@ -1779,7 +1779,8 @@ function mostra(){
     '<div class="pq-stats"><b>'+k.n+'</b>/'+fila.length+' respondidas<br>'+k.ok+' certas · '+(k.n-k.ok)+' erradas</div>'+
     '<div class="pq-lab">Imágenes</div><div class="pq-pills">'+fila.map(function(y,i){return '<button data-i="'+i+'" class="'+estado(i)+(i===pos?' cur':'')+'">'+(i+1)+'</button>'}).join('')+'</div>'+
     '<div class="pq-acts"><button id="p2sair">Sair</button><button id="p2res">Ver resultado</button></div></aside>'+
-    '<section class="pq-main"><div class="pq-card"><div class="pq-head"><span class="pq-tag">'+(x.eixo==='H'?'Histología':'Embriología')+'</span><span class="pq-tag">'+esc(x.tema)+'</span></div>'+
+    // Vini, 22/11: eixo e tema entregam a resposta; antes de corrigir só o número da imagem, as etiquetas vêm com o gabarito
+    '<section class="pq-main"><div class="pq-card"><div class="pq-head">'+(s?'<span class="pq-tag">'+(x.eixo==='H'?'Histología':'Embriología')+'</span><span class="pq-tag">'+esc(x.tema)+'</span>':'<span class="pq-tag">Imagen '+(pos+1)+' de '+fila.length+'</span>')+'</div>'+
     '<div class="pq-body"><div class="pq-img"><img src="'+esc(x.img)+'" alt="Imagen del parcial" id="p2im"></div><div class="pq-qs" id="p2lado">'+
     x.perguntas.map(function(p,i){return '<div class="q" id="p2q'+i+'"><label for="p2r'+i+'">'+(i+1)+'. '+esc(p.pergunta)+(p.tipo==='extra'?' <span class="pq-extra">extra</span>':'')+'</label><input id="p2r'+i+'" autocomplete="off"><div class="res" id="p2s'+i+'"></div></div>'}).join('')+
     '<button id="p2cor">Corregir</button><div id="p2chs"></div></div></div>'+

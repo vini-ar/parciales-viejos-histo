@@ -1840,8 +1840,14 @@ var SIM_PESO_H={TP14:32,TP15:22,TP17:22,TP18:23,TP19:21,TP20:17,TP22:17,TP13:17}
 var SIM_NOM={TH:'Teoría · Histología',IH:'Imagen · Histología',TE:'Teoría · Embriología',IE:'Imagen · Embriología'};
 var SIM_ORD=['TH','IH','TE','IE'];
 function simKey(q){return q._sk||norm(q.stem)}
+// Tamaño en papel (Vini, 22/11, prueba en papel 1º parcial 2023): en Histología la cátedra usa preguntas cortas (enunciado + 5 opciones
+// de ~80 a ~320 caracteres, mediana ~220; el banco tiene mediana 392). El simulacro solo usa las de hasta 350 caracteres en Histología.
+// Embriología en papel ya es larga (mediana ~330, hasta ~800), igual que el banco: sin límite.
+var SIM_MAX_CHARS={'Histología':350};
+function simTam(q){ var o=q.opts||{}; return (q.stem||'').length+Object.keys(o).map(function(k){return o[k]}).join(' ').length }
 function simPool(mat,tp){ var seen={}; return (window.P2_BANCO||[]).filter(function(q){
   if(q.ciclo!=='2'||q.mat!==mat||q.tp!==tp||!q.ans||!q.opts||Object.keys(q.opts).length<2) return false;
+  if(SIM_MAX_CHARS[mat]&&simTam(q)>SIM_MAX_CHARS[mat]) return false;
   var k=simKey(q); if(seen[k]) return false; seen[k]=1; return true }) }
 function simTeoria(mat,pesos,n){
   var pools={}, usados={}, out=[], tps=Object.keys(pesos).filter(function(tp){ pools[tp]=simPool(mat,tp); return pools[tp].length });

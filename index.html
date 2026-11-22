@@ -635,7 +635,14 @@ body{background-image:none}
           <button data-v="uniq" aria-pressed="false">Sem repetidas</button>
         </div>
       </div>
-      <div class="ctl">
+      <!-- ---------- filtro curtas ---------- --><div class="ctl" title="Histología: solo preguntas de hasta 350 caracteres (enunciado + opciones), como en el parcial en papel. Embriología no cambia.">
+        <span class="ctl-label">Tamanho</span>
+        <div class="seg" id="segTam">
+          <button data-v="all" aria-pressed="true">Todas</button>
+          <button data-v="curtas" aria-pressed="false">Curtas (papel)</button>
+        </div>
+      </div>
+      <!-- ---------- fim filtro curtas ---------- --><div class="ctl">
         <span class="ctl-label">Quantidade</span>
         <div class="seg" id="segLimit">
           <button data-v="10" aria-pressed="false">10</button>
@@ -902,6 +909,20 @@ function wireSeg(id, key, cast){
 }
 wireSeg('segMat','mat'); wireSeg('segOrder','order'); wireSeg('segLimit','limit', Number);
 wireSeg('segDup','dupes'); wireSeg('segOrig','orig');
+/* ---------- filtro curtas ---------- */
+var TAM_MAX = {'Histología': 350};
+function tamQ(q){ var o=q.opts||{}; return (q.stem||'').length+Object.keys(o).map(function(k){return o[k]}).join(' ').length; }
+function curtaQ(q){ var m=TAM_MAX[q.mat||'Histología']; return !m || tamQ(q)<=m; }
+function aplicaTam(){   // _qsTodas na hora do clique: outros blocos ainda acrescentam grupos depois deste
+  GROUPS.forEach(function(g){ if(!g._qsTodas) g._qsTodas = g.qs; g.qs = opt.tam==='curtas' ? g._qsTodas.filter(curtaQ) : g._qsTodas; });
+}
+opt.tam = 'all';
+$('segTam').addEventListener('click', function(e){
+  var b = e.target.closest('button'); if(!b) return;
+  [].forEach.call(this.querySelectorAll('button'), function(x){ x.setAttribute('aria-pressed', String(x===b)); });
+  opt.tam = b.dataset.v; aplicaTam(); renderHome();
+});
+/* ---------- fim filtro curtas ---------- */
 
 /* ---------- autoevaluaciones ---------- */
 function renderAuto(){

@@ -415,6 +415,15 @@ body.pqfull .wrap{max-width:none;padding:0}body.pqfull main{padding:0;margin:0}
   background:transparent;color:#c9cdf0;font:600 12px system-ui,sans-serif;cursor:pointer}
 .bc-recomeca:hover{background:rgba(255,255,255,.08);color:#fff}
 /* ---------- fim retomar rodada (css) ---------- */
+/* github: figura da questão na coluna direita */
+.ghfig{display:none;margin:0}
+@media (min-width:900px){
+  body.emquiz .qleft .qimg{display:none}
+  body.emquiz .qright{display:flex;flex-direction:column;gap:10px}
+  body.emquiz .ghfig{display:flex;flex-direction:column;align-items:center;gap:4px;flex:0 1 auto;min-height:0}
+  body.emquiz .ghfig .qimg{display:block;max-width:100%;width:auto;height:auto;max-height:calc(100vh - 290px);object-fit:contain;border:1px solid var(--rule);border-radius:6px;margin:0}
+  body.emquiz .ghfig figcaption{font-family:var(--mono);font-size:10.5px;color:var(--silver);text-align:center}
+}
 </style>
 <style id="bc-design">
 :root{
@@ -1397,6 +1406,14 @@ function notaDe(q, k, given){
   return '';
 }
 function colunaDireita(q, given, answered){
+  var h = colunaDireitaBase(q, given, answered);
+  if(!q.img) return h;
+  var fig = '<figure class="ghfig"><img class="qimg" src="'+esc(q.img)+'" alt="Imagem da questão"><figcaption>clique para ampliar</figcaption></figure>';
+  h = h.replace('<div class="espera">O veredito aparece aqui depois de responder.</div>', '');
+  var i = h.indexOf('<span class="qid">');
+  return i >= 0 ? h.slice(0, i) + fig + h.slice(i) : h.replace('</aside>', fig + '</aside>');
+}
+function colunaDireitaBase(q, given, answered){
   var qid = '<span class="qid">#'+esc(q.id)+' · '+esc(q.cat)+'</span>';
   if(!answered) return '<aside class="qright"><div class="espera">O veredito aparece aqui depois de responder.</div></aside>';
   if(!q.ans) return '<aside class="qright"><div class="verdict"><h3>Resposta registrada</h3>'+

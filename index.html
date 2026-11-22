@@ -343,6 +343,12 @@ img.qimg{cursor:zoom-in}
 #qzoom img{width:96vw;height:92vh;object-fit:contain;background:#fff;border-radius:6px}
 #qzoom .qzdica{position:fixed;bottom:10px;left:0;right:0;text-align:center;color:#ddd;font:13px system-ui,sans-serif}
 /* ---------- fim zoom figuras ---------- */
+
+/* ---------- retomar rodada (css) ---------- */
+.bc-recomeca{display:block;width:100%;margin:10px 0 0;padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.22);
+  background:transparent;color:#c9cdf0;font:600 12px system-ui,sans-serif;cursor:pointer}
+.bc-recomeca:hover{background:rgba(255,255,255,.08);color:#fff}
+/* ---------- fim retomar rodada (css) ---------- */
 /* ---------- imagenes parcial (css) ---------- */
 #viewImg{--p2ok:#2e7d4f;--p2bad:#c0392b;--p2line:var(--rule,#dcdad5);--p2muted:#6b6b70;--p2acc:var(--hema,#28407a);--p2card:var(--field,transparent)}
 @media (prefers-color-scheme:dark){#viewImg{--p2ok:#5cc28a;--p2bad:#ef6b5c;--p2muted:#a0a0a6}}
@@ -363,6 +369,7 @@ img.qimg{cursor:zoom-in}
 #viewImg .op.ok{border-color:var(--p2ok);color:var(--p2ok);font-weight:600}#viewImg .op.bad{border-color:var(--p2bad);color:var(--p2bad)}
 #viewImg .chips{display:flex;flex-wrap:wrap;gap:6px 14px;margin:6px 0}#viewImg select{font:inherit;padding:6px;border-radius:8px;border:1px solid var(--p2line);background:transparent;color:inherit}
 #viewImg .tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;border:1px solid var(--p2line);color:var(--p2muted)}
+.p2simcard{cursor:default}.p2simcard .p2simgo{font:inherit;margin:6px 8px 0 0;padding:6px 12px;border:1px solid var(--rule,#ccc);border-radius:6px;background:transparent;color:inherit;cursor:pointer}
 #p2zoom{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:99}#p2zoom img{max-width:96vw;max-height:96vh}
 /* ---------- quiz ---------- */
 #viewImg .pq{display:grid;grid-template-columns:270px minmax(0,1fr);height:100vh;--pqside:#1f2246;--pqcard:#fff;--pqline:#e3e3ea;--pqink:#1d1d1f;--pqmut:#6b6b70;--pqok:#2e7d4f;--pqbad:#c0392b;--pqopt:#f5f6fa}
@@ -406,15 +413,22 @@ img.qimg{cursor:zoom-in}
 #viewImg .pq-fpe button:disabled{opacity:.4;cursor:default}
 #viewImg .pq-origen{margin:10px 0;padding:8px 10px;border-left:3px solid #8a8f98}
 #viewImg .pq-extra{font-size:11px;padding:1px 6px;border-radius:8px;border:1px solid #8a8f98;color:#8a8f98;font-weight:400}
+#viewImg .pq-pills button.pqs-done{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.55)}
+#viewImg .pqs-gl{flex:0 0 100%;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#aab0d6;margin-top:4px}
+@media (max-width:899px){#viewImg .pqs-gl{flex:0 0 auto;align-self:center;margin:0 4px 0 8px}}
+#viewImg .pq-body.pqs-b1{display:block;overflow:auto}
+#viewImg .pq-qs .op.pqs-sel{border-color:var(--pqink);box-shadow:inset 0 0 0 1px var(--pqink);font-weight:600}
+#viewImg .pqs-nota{margin:-2px 0 8px 4px}
+#viewImg .pqs-aviso{border:1px solid #c0392b;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:14px}
+#viewImg .pqs-aviso button{margin:8px 8px 0 0}
+#viewImg .pqs-home{margin-top:16px}#viewImg .pqs-txt{font-size:14px;line-height:1.5}
+#viewImg .pqs-h{margin:0;font-size:22px}#viewImg .pqs-ver{font-size:30px;font-weight:700}
+#viewImg .pqs-ok{color:#2e7d4f}#viewImg .pqs-bad{color:#c0392b}
+#viewImg .pqs-tab{width:100%;border-collapse:collapse;font-size:15px}#viewImg .pqs-tab th,#viewImg .pqs-tab td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--pfline)}
+#viewImg .pqs-tab tr.pqs-tot td{font-weight:700}
 body.pqfull .masthead,body.pqfull .topnav,body.pqfull .wrap>footer,body.pqfull #viewImg>h2,body.pqfull #viewImg>.sub{display:none}
 body.pqfull .wrap{max-width:none;padding:0}body.pqfull main{padding:0;margin:0}
 /* ---------- fim imagenes parcial (css) ---------- */
-
-/* ---------- retomar rodada (css) ---------- */
-.bc-recomeca{display:block;width:100%;margin:10px 0 0;padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.22);
-  background:transparent;color:#c9cdf0;font:600 12px system-ui,sans-serif;cursor:pointer}
-.bc-recomeca:hover{background:rgba(255,255,255,.08);color:#fff}
-/* ---------- fim retomar rodada (css) ---------- */
 /* github: figura da questão na coluna direita */
 .ghfig{display:none;margin:0}
 @media (min-width:900px){
@@ -474,6 +488,102 @@ body{background-image:none}
   body.emquiz .bcMain{display:flex;flex-direction:column;min-height:0;height:100vh;padding:18px 24px 0;max-width:1400px;width:100%;margin:0 auto}
 }
 </style>
+<!-- ---------- modo celular (css) ---------- --><style id="modo-celular">
+#mcBar,#mcFundo,.mc-meio,.mc-fecha{display:none}
+@media (max-width:899px){
+  /* a página do quiz: só barra de cima, cartão e barra de baixo */
+  body.emquiz .masthead,body.emquiz .topnav,body.emquiz .wrap>footer{display:none}
+  body.emquiz .wrap{padding:0 10px}
+  body.emquiz #viewQuiz:not([hidden]){display:block;padding:66px 0 calc(132px + env(safe-area-inset-bottom))}
+  body.emquiz.mc-folha{overflow:hidden}
+
+  /* barra fixa de cima */
+  body.emquiz #mcBar{display:flex;align-items:center;gap:8px;position:fixed;top:0;left:0;right:0;z-index:40;height:56px;
+    padding:0 8px;padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right));
+    background:var(--bc-side);color:#fff;box-shadow:0 2px 10px rgba(20,22,50,.25)}
+  #mcBar button{appearance:none;font:600 13px var(--body);color:#fff;cursor:pointer;margin:0}
+  #mcSair,#mcAbre{flex:0 0 auto;height:44px;min-width:44px;padding:0 12px;border-radius:10px;
+    border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08)}
+  #mcTit{flex:1 1 auto;min-width:0;height:48px;padding:0 2px;border:0;background:transparent;text-align:left;
+    display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:2px;overflow:hidden}
+  #mcTit b{display:block;font-size:14px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #mcTit>span{display:block;font-size:12px;font-weight:500;line-height:1.25;color:#c3c8ea;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #mcTit .mc-ok{color:#7fdb9b}#mcTit .mc-bad{color:#ff9d9d}
+  #mcProg{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.14)}
+  #mcProg i{display:block;height:100%;width:0;background:#8f86ff;transition:width .2s}
+
+  /* folha das questões: o cartão do TP sobe de baixo */
+  body.emquiz #bcSide{display:none}
+  body.emquiz.mc-folha #mcFundo{display:block;position:fixed;inset:0;z-index:45;background:rgba(10,12,30,.55)}
+  body.emquiz.mc-folha #bcSide{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:46;margin:0;gap:12px;
+    max-height:84vh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+    border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));
+    box-shadow:0 -8px 30px rgba(0,0,0,.35)}
+  body.emquiz #bcSide>*{flex:0 0 auto}
+  body.emquiz #bcSide h2{font-size:16px;padding-right:92px;min-height:44px;display:flex;align-items:center}
+  body.emquiz #bcSide .mc-fecha{display:block;position:absolute;top:14px;right:14px;height:44px;padding:0 14px;border-radius:10px;
+    border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:#fff;font:600 13px var(--body);cursor:pointer}
+  body.emquiz #bcSide .bc-stats{font-size:14px}
+  body.emquiz #bcPills{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:8px;padding:2px;
+    max-height:46vh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  body.emquiz #bcPills button{height:44px;min-width:44px;border-radius:9px;font-size:14px}
+  body.emquiz #bcSide .bc-acts{gap:8px}
+  body.emquiz #bcSide .bc-acts button{min-height:48px;font-size:14px;border-radius:10px}
+  body.emquiz #bcSide .bc-recomeca{min-height:44px;margin:0;font-size:13px;border-radius:10px}
+
+  /* cartão da questão */
+  body.emquiz .qcard{padding:12px 14px 14px;border-radius:14px}
+  body.emquiz .qhead{min-height:44px;margin-bottom:8px}
+  body.emquiz .qhead:not(:has(.badge)){float:right;margin:-4px -4px 4px 10px}
+  body.emquiz .flagbtn{min-height:44px;padding:0 14px;font-size:12px}
+  body.emquiz .stem{font-size:17px;line-height:1.45;margin:0 0 14px}
+  body.emquiz .qleft .qimg{width:calc(100% + 28px);max-width:none;height:auto;max-height:56vh;object-fit:contain;background:#fff;
+    margin:0 -14px 14px;border-left:0;border-right:0;border-radius:0;clear:both}
+  body.emquiz .opts{gap:8px;clear:both}
+  body.emquiz .optrow{scroll-margin:68px 0 136px}
+  body.emquiz .opt{padding-right:56px;min-height:52px}
+  body.emquiz .opt:disabled{padding-right:15px}
+  body.emquiz .elimx{width:44px;height:44px;right:4px}
+  body.emquiz .nota{font-size:15px;line-height:1.5}
+  body.emquiz .qcard .kbd{display:none}
+  body.emquiz .qcard.resp .qright{margin-top:14px;padding-top:12px}
+
+  /* zoom da figura: largura toda da tela, sem moldura branca */
+  #qzoom img{width:100vw;height:auto;max-height:90vh;border-radius:0}
+
+  /* veredito: faixa fixa acima da barra de baixo */
+  body.emquiz .qcard.resp .qright .verdict{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));z-index:39;
+    margin:0;padding:0;border:0;background:#4b5180;color:#fff;cursor:pointer;box-shadow:0 -2px 10px rgba(20,22,50,.18)}
+  body.emquiz .qcard.resp .qright .verdict h3{margin:0;padding:10px 14px;min-height:38px;border-radius:0;text-align:center;
+    font-family:var(--body);font-size:13px;font-weight:700;letter-spacing:.04em;line-height:1.35;color:#fff;background:transparent}
+  body.emquiz .qcard.resp .qright .verdict h3.ok{background:var(--masson)}
+  body.emquiz .qcard.resp .qright .verdict h3.no{background:var(--eosin)}
+  body.emquiz .qcard.resp .qright .verdict .expl{margin:0;padding:0 14px 8px;font-size:12px;line-height:1.35;color:#e6e8fb;text-align:center}
+
+  /* barra fixa de baixo: Voltar, contador, Seguinte */
+  body.emquiz .qcard .navrow{position:fixed;left:0;right:0;bottom:0;z-index:40;margin:0;flex-wrap:nowrap;gap:8px;height:auto;
+    padding:8px 10px calc(8px + env(safe-area-inset-bottom));padding-left:max(10px,env(safe-area-inset-left));
+    padding-right:max(10px,env(safe-area-inset-right));background:var(--glass);border-top:1px solid var(--rule);
+    box-shadow:0 -4px 16px rgba(20,22,50,.08)}
+  body.emquiz .navrow .btn{min-height:48px;padding:0 14px;border-radius:12px;font-size:15px;font-weight:600}
+  body.emquiz .navrow #btnPrev{flex:1 1 0;min-width:0}
+  body.emquiz .navrow .right{flex:1.5 1 0;min-width:0;margin:0}
+  body.emquiz .navrow .right .btn{width:100%}
+  body.emquiz .navrow .mc-meio{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 auto;
+    appearance:none;min-width:78px;height:48px;padding:0 10px;border-radius:12px;border:1px solid var(--rule);background:var(--field);
+    color:var(--hema);font:500 14px/1.15 var(--body);cursor:pointer;margin:0}
+  body.emquiz .navrow .mc-meio b{font-weight:700}
+  body.emquiz .navrow .mc-meio span{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--silver)}
+}
+/* celular deitado: barras mais baixas */
+@media (max-width:899px) and (max-height:480px){
+  body.emquiz #viewQuiz:not([hidden]){padding-top:58px}
+  body.emquiz #mcBar{height:48px}
+  #mcSair,#mcAbre{height:40px}
+  body.emquiz .qleft .qimg{max-height:62vh}
+  body.emquiz #bcPills{max-height:none;overflow:visible}
+}
+</style><!-- ---------- fim modo celular (css) ---------- -->
 </head>
 <body>
 <div class="wrap">
@@ -655,6 +765,7 @@ NOVAS.forEach(function(q,i){
   gmap[key].qs.push(q);
 });
 ALL=ALL.concat(NOVAS);
+window.P2_BANCO = ALL; /* simulacro p2 */
 /* ---------- fim das provas 2020-2021 ---------- */
 /* ---------- HISTO TODOS 2020: as mesmas questões do BANK, agrupadas por TP ---------- */
 BANK.forEach(function(q){
@@ -1529,6 +1640,67 @@ bcSide = function(){
   el.appendChild(b);
 };
 /* ---------- fim retomar rodada ---------- */
+/* ---------- modo celular ---------- */
+var MC_MQ = window.matchMedia ? window.matchMedia('(max-width:899px)') : {matches:false};
+function mcFolha(abre){
+  document.body.classList.toggle('mc-folha', !!abre);
+  if(abre){ var c = document.querySelector('#bcPills button.cur'); if(c && c.scrollIntoView) c.scrollIntoView({block:'center'}); }
+}
+function mcMonta(){
+  if($('mcBar')) return;
+  var v = $('viewQuiz'), b = document.createElement('div'), f = document.createElement('div');
+  b.id = 'mcBar'; f.id = 'mcFundo';
+  b.innerHTML = '<button type="button" id="mcSair">Sair</button>'+
+    '<button type="button" id="mcTit" aria-label="Abrir a lista de questões"><b></b><span></span></button>'+
+    '<button type="button" id="mcAbre">Questões</button><i id="mcProg" aria-hidden="true"><i></i></i>';
+  v.appendChild(b); v.appendChild(f);
+  $('mcSair').onclick = function(){ mcFolha(false); $('btnExit').click(); };
+  $('mcTit').onclick = $('mcAbre').onclick = function(){ mcFolha(true); };
+  f.onclick = function(){ mcFolha(false); };
+  // tocar na faixa do veredito leva à alternativa correta
+  $('qcard').addEventListener('click', function(e){
+    if(!MC_MQ.matches || !e.target.closest || !e.target.closest('.qright .verdict')) return;
+    var g = $('qcard').querySelector('.optrow.good'); if(g) g.scrollIntoView({block:'nearest', behavior:'smooth'});
+  });
+}
+var _sideMC = bcSide;
+bcSide = function(){
+  _sideMC();
+  var el = $('bcSide'); if(!el || !S) return;
+  mcMonta(); mcFolha(false);
+  var t = tally();
+  $('mcTit').firstChild.textContent = S.title;
+  $('mcTit').lastChild.innerHTML = t.done+'/'+S.qs.length+' · <span class="mc-ok">'+t.ok+(t.ok===1?' certa':' certas')+'</span> · '+
+    '<span class="mc-bad">'+t.wrong.length+(t.wrong.length===1?' errada':' erradas')+'</span>';
+  $('mcProg').firstChild.style.width = (100*t.done/S.qs.length)+'%';
+  var x = document.createElement('button'); x.type = 'button'; x.className = 'mc-fecha'; x.textContent = 'Fechar';
+  x.onclick = function(){ mcFolha(false); };
+  el.insertBefore(x, el.firstChild);
+  var nav = $('qcard').querySelector('.navrow');
+  if(nav && !nav.querySelector('.mc-meio')){
+    var m = document.createElement('button'); m.type = 'button'; m.className = 'mc-meio';
+    m.setAttribute('aria-label', 'Questão '+(S.i+1)+' de '+S.qs.length+'. Abrir a lista de questões');
+    m.innerHTML = '<div><b>'+(S.i+1)+'</b>/'+S.qs.length+'</div><span>questões</span>';
+    m.onclick = function(){ mcFolha(true); };
+    nav.insertBefore(m, nav.querySelector('.right'));
+  }
+};
+var _pickMC = pick;
+pick = function(k){
+  var antes = S && S.given[S.i];
+  _pickMC(k);
+  if(!MC_MQ.matches || !S || antes!=null || S.given[S.i]==null) return;
+  // rola só o necessário: a marcada e a correta juntas se couberem entre as barras; senão, a correta
+  var bad = $('qcard').querySelector('.optrow.bad'), good = $('qcard').querySelector('.optrow.good');
+  if(!good && !bad) return;
+  var a = (good||bad).getBoundingClientRect(), b = (bad||good).getBoundingClientRect();
+  var cima = 68, baixo = window.innerHeight - 136;
+  var top = Math.min(a.top, b.top), fim = Math.max(a.bottom, b.bottom);
+  if(fim - top > baixo - cima){ top = a.top; fim = a.bottom; }
+  if(top < cima) window.scrollBy(0, top - cima);
+  else if(fim > baixo) window.scrollBy(0, Math.min(fim - baixo, top - cima));
+};
+/* ---------- fim modo celular ---------- */
 /* ---------- imagenes parcial ---------- */
 (function(){
 var ROOT=document.getElementById('viewImg');
@@ -1556,6 +1728,7 @@ function inicio(){
     '<div class="pq-fnota">Según cuántos relatos de final (oral) citan el órgano o el tema de la imagen.</div>'+
     '<div class="pq-fpe"><span class="pq-total"><b>'+tot+'</b>imágenes con este filtro</span>'+
     '<button id="p2est" class="sec"'+(tot?'':' disabled')+'>Modo estudio (con respuestas)</button><button id="p2ir"'+(tot?'':' disabled')+'>Practicar</button></div></div>';
+  if(window.P2_BANCO) simHome();
   ROOT_Q('[data-e]').forEach(function(b){ b.onclick=function(){ F.e=b.dataset.e; inicio() } });
   ROOT_Q('[data-t]').forEach(function(b){ b.onclick=function(){ F.t=b.dataset.t; inicio() } });
   ROOT_Q('[data-o]').forEach(function(b){ b.onclick=function(){ F.o=b.dataset.o; inicio() } });
@@ -1658,6 +1831,157 @@ document.addEventListener('keydown',function(e){
   else if((e.key==='r'||e.key==='R')&&$('rot')){ $('rot').click() }
 });
 function pc(a,b){return b?Math.round(100*a/b)+'%':'-'}
+/* ---------- simulacro del 2º parcial (solo con el banco: window.P2_BANCO) ---------- */
+var SM=null;
+// Proporción por TP de la teoría. Histología: peso de cada TP en la prueba «HISTO TODOS 2º parcial 2020» (preguntas con h20 en el banco);
+// TP13 (Respiratorio) no cayó en 2020 pero está en el programa de 2026. Embriología: «prova 3 - 2 parcial» (2º parcial, feb/2021, 22 preguntas
+// solo de Embrio): 11 de desarrollo digestivo/endocrino/faringe (TP16) y 11 de urogenital (TP21).
+var SIM_PESO_H={TP14:32,TP15:22,TP17:22,TP18:23,TP19:21,TP20:17,TP22:17,TP13:17}, SIM_PESO_E={TP16:11,TP21:11};
+var SIM_NOM={TH:'Teoría · Histología',IH:'Imagen · Histología',TE:'Teoría · Embriología',IE:'Imagen · Embriología'};
+var SIM_ORD=['TH','IH','TE','IE'];
+function simKey(q){return q._sk||norm(q.stem)}
+function simPool(mat,tp){ var seen={}; return (window.P2_BANCO||[]).filter(function(q){
+  if(q.ciclo!=='2'||q.mat!==mat||q.tp!==tp||!q.ans||!q.opts||Object.keys(q.opts).length<2) return false;
+  var k=simKey(q); if(seen[k]) return false; seen[k]=1; return true }) }
+function simTeoria(mat,pesos,n){
+  var pools={}, usados={}, out=[], tps=Object.keys(pesos).filter(function(tp){ pools[tp]=simPool(mat,tp); return pools[tp].length });
+  while(out.length<n){
+    var vivos=tps.filter(function(tp){ return pools[tp].some(function(q){return !usados[simKey(q)]}) });
+    if(!vivos.length) break;
+    var tot=vivos.reduce(function(s,tp){return s+pesos[tp]},0), r=Math.random()*tot, tp=vivos[vivos.length-1];
+    for(var i=0;i<vivos.length;i++){ r-=pesos[vivos[i]]; if(r<0){ tp=vivos[i]; break } }
+    var cand=pools[tp].filter(function(q){return !usados[simKey(q)]}), q=cand[Math.floor(Math.random()*cand.length)];
+    usados[simKey(q)]=1; out.push(q);
+  }
+  return out;
+}
+function simPs(x){ return (x.perguntas||[]).filter(function(p){return p.tipo!=='extra'&&p.n>=1&&p.n<=3}).sort(function(a,b){return a.n-b.n}).slice(0,3) }
+function simImagen(eixo){
+  var c=D.filter(function(x){ return x.eixo===eixo&&(eixo!=='H'||/^HG/.test(x.id))&&(x.choices||[]).length>=2&&simPs(x).length===3 });
+  return c.length?c[Math.floor(Math.random()*c.length)]:null }
+function simIniciar(tam){
+  if(!window.P2_BANCO) return;
+  var n=tam==='largo'?20:5, it=[];
+  var th=simTeoria('Histología',SIM_PESO_H,n), te=simTeoria('Embriología',SIM_PESO_E,n), ih=simImagen('H'), ie=simImagen('E');
+  function img(parte,x){ return {k:'img',parte:parte,x:x,ps:simPs(x),ch:x.choices.slice(0,2),mc:[null,null],w:['','',''],contada:{}} }
+  th.forEach(function(q){it.push({k:'mc',parte:'TH',q:q,r:null})}); if(ih) it.push(img('IH',ih));
+  te.forEach(function(q){it.push({k:'mc',parte:'TE',q:q,r:null})}); if(ie) it.push(img('IE',ie));
+  SM={tam:tam,itens:it,pos:0,aviso:null}; simTela();
+}
+function simResp(it){ return it.k==='mc'?it.r!=null:(it.mc.some(function(v){return v!=null})||it.w.some(function(w){return String(w).trim()})) }
+function simBlancos(){ var b=0; SM.itens.forEach(function(it){ if(it.k==='mc'){ if(it.r==null) b++ } else { it.mc.forEach(function(v){if(v==null)b++}); it.w.forEach(function(w){if(!String(w).trim())b++}) } }); return b }
+function simPts(it){
+  if(it.k==='mc') return {a:(it.r!=null&&it.r===it.q.ans)?1:0,t:1};
+  var a=0; it.ch.forEach(function(c,i){ if(it.mc[i]===c.ans) a++ }); it.ps.forEach(function(p,i){ if(certo(it.w[i],p.aceitas)||it.contada[i]) a++ });
+  return {a:a,t:5} }
+function simPartes(){ var P={}; SIM_ORD.forEach(function(k){P[k]={a:0,t:0}}); SM.itens.forEach(function(it){ var p=simPts(it); P[it.parte].a+=p.a; P[it.parte].t+=p.t }); return P }
+function simPills(rev){
+  var last='', h=''; SM.itens.forEach(function(y,i){ if(y.parte!==last){ last=y.parte; h+='<span class="pqs-gl">'+SIM_NOM[last]+'</span>' }
+    var cl=rev?(simPts(y).a===simPts(y).t?'ok ':'bad '):(simResp(y)?'pqs-done ':'');
+    h+='<button type="button" data-i="'+i+'" class="'+cl+(i===SM.pos?'cur':'')+'">'+(i+1)+'</button>' }); return h }
+function simTit(){ return 'Simulacro 2º parcial · '+(SM.tam==='largo'?'Largo':'Formato real') }
+function simSet(f){ var it=SM.itens[SM.pos]; f(it); simTela() }
+function simTela(){
+  modo='sim'; document.body.classList.add('pqfull'); var it=SM.itens[SM.pos], n=SM.itens.length, nr=SM.itens.filter(simResp).length, ax=SM.aviso;
+  var av=ax?'<div class="pqs-aviso" role="alert">'+(ax.t==='fin'?'Quedan <b>'+ax.n+'</b> respuestas en blanco; cuentan como incorrectas.':'Si salís ahora se pierde el simulacro.')+
+    '<div><button type="button" class="sec" data-av="no">Seguir respondiendo</button><button type="button" data-av="si">'+(ax.t==='fin'?'Terminar y corregir':'Salir igual')+'</button></div></div>':'';
+  var cuerpo;
+  if(it.k==='mc'){ var q=it.q, ks=Object.keys(q.opts).sort();
+    cuerpo='<div class="pq-body'+(q.img?'':' pqs-b1')+'">'+(q.img?'<div class="pq-img"><img class="qimg" src="'+esc(q.img)+'" alt="Figura de la pregunta"></div>':'')+
+      '<div class="pq-qs"><div class="q"><label>'+(SM.pos+1)+'. '+esc(q.stem)+'</label></div>'+
+      ks.map(function(k){return '<button type="button" class="op pqs-opt'+(it.r===k?' pqs-sel':'')+'" data-k="'+k+'">'+k+') '+esc(q.opts[k])+'</button>'}).join('')+'</div></div>';
+  } else { var x=it.x;
+    cuerpo='<div class="pq-body"><div class="pq-img"><img src="'+esc(x.img)+'" alt="Imagen del parcial" id="p2im"></div><div class="pq-qs">'+
+      it.ch.map(function(c,k){return '<div class="ch"><p>Choice '+(k+1)+'. '+esc(c.stem)+'</p>'+c.opts.map(function(o,j){return '<button type="button" class="op pqs-opt'+(it.mc[k]===j?' pqs-sel':'')+'" data-c="'+k+'" data-k="'+j+'">'+String.fromCharCode(65+j)+') '+esc(o)+'</button>'}).join('')+'</div>'}).join('')+
+      it.ps.map(function(p,i){return '<div class="q"><label for="p2r'+i+'">Escrita '+(i+1)+'. '+esc(p.pergunta)+'</label><input id="p2r'+i+'" autocomplete="off" value="'+esc(it.w[i])+'"></div>'}).join('')+'</div></div>'; }
+  $('app').innerHTML='<div class="pq"><aside class="pq-side"><h2>'+esc(simTit())+'</h2>'+
+    '<div class="pq-stats" id="p2st"><b>'+nr+'</b>/'+n+' respondidas</div><div class="pq-lab">Preguntas</div><div class="pq-pills">'+simPills(false)+'</div>'+
+    '<div class="pq-acts"><button type="button" data-a="sal">Salir</button><button type="button" data-a="fin">Terminar y corregir</button></div></aside>'+
+    '<section class="pq-main"><div class="pq-card"><div class="pq-head"><span class="pq-tag">'+SIM_NOM[it.parte]+'</span><span class="pq-tag">Pregunta '+(SM.pos+1)+' de '+n+'</span></div>'+av+cuerpo+
+    '<div class="pq-kbd">&larr; &rarr; navegan · A&ndash;E eligen en la múltiple (en la imagen, la primera choice sin responder) · sin corrección hasta terminar</div>'+
+    '<div class="pq-nav"><button type="button" class="sec" data-a="ant"'+(SM.pos?'':' disabled')+'>Anterior</button><button type="button" class="sec" data-a="sig"'+(SM.pos<n-1?'':' disabled')+'>Siguiente</button></div></div></section></div>';
+  if($('im')) $('im').onclick=function(){zoom(it.x.img)};
+  ROOT_Q('.pq-pills button').forEach(function(b){ b.onclick=function(){ SM.pos=+b.dataset.i; SM.aviso=null; simTela() } });
+  ROOT_Q('[data-a]').forEach(function(b){ b.onclick=function(){ var a=b.dataset.a;
+    if(a==='ant'){ SM.pos--; SM.aviso=null; simTela() } else if(a==='sig'){ SM.pos++; SM.aviso=null; simTela() }
+    else if(a==='fin') simTerminar(false); else if(a==='sal'){ SM.aviso={t:'sal'}; simTela() } } });
+  ROOT_Q('[data-av]').forEach(function(b){ b.onclick=function(){ var t=SM.aviso.t; SM.aviso=null;
+    if(b.dataset.av==='no'){ simTela(); return } if(t==='fin') simTerminar(true); else { SM=null; inicio() } } });
+  ROOT_Q('.pqs-opt').forEach(function(b){ b.onclick=function(){ if(it.k==='mc'){ it.r=(it.r===b.dataset.k)?null:b.dataset.k } else { var c=+b.dataset.c, j=+b.dataset.k; it.mc[c]=(it.mc[c]===j)?null:j } simTela() } });
+  var ins=ROOT_Q('.q input'); ins.forEach(function(inp,i){
+    inp.oninput=function(){ it.w[i]=inp.value; var cur=ROOT_Q('.pq-pills .cur')[0]; if(cur) cur.classList.toggle('pqs-done',simResp(it)); $('st').innerHTML='<b>'+SM.itens.filter(simResp).length+'</b>/'+n+' respondidas' };
+    inp.onkeydown=function(e){ if(e.key==='Enter'){ e.preventDefault(); if(ins[i+1]) ins[i+1].focus(); else inp.blur() } } });
+  var cur=ROOT_Q('.pq-pills .cur')[0]; if(cur&&cur.scrollIntoView) cur.scrollIntoView({block:'nearest'});
+}
+function simTerminar(forzar){ var b=simBlancos(); if(b&&!forzar){ SM.aviso={t:'fin',n:b}; simTela(); return } simResultado() }
+function simResultado(){
+  modo='simres'; document.body.classList.remove('pqfull'); var P=simPartes(), real=SM.tam==='real', ta=0, tt=0;
+  SIM_ORD.forEach(function(k){ ta+=P[k].a; tt+=P[k].t });
+  var filas=SIM_ORD.map(function(k){ var p=P[k]; return '<tr><td>'+SIM_NOM[k]+'</td><td>'+p.a+' / '+p.t+'</td><td class="'+(real?(p.a<2?'pqs-bad':'pqs-ok'):'')+'">'+(real?(p.a<2?'menos de 2':'al menos 2'):pc(p.a,p.t))+'</td></tr>' }).join('');
+  filas+='<tr class="pqs-tot"><td>Total</td><td>'+ta+' / '+tt+'</td><td>'+(real?'nota sobre '+tt:pc(ta,tt))+'</td></tr>';
+  var ver='';
+  if(real){ var bajo=SIM_ORD.filter(function(k){return P[k].a<2}), v=(bajo.length||ta<8)?'Desaprobado':(ta>=14?'Promocionado':'Aprobado');
+    ver='<div class="pqs-ver '+(v==='Desaprobado'?'pqs-bad':'pqs-ok')+'">'+v+'</div>';
+    if(bajo.length) ver+='<p>Partes por debajo de 2 aciertos: '+bajo.map(function(k){return '<b>'+SIM_NOM[k]+'</b> ('+P[k].a+'/'+P[k].t+')'}).join(', ')+'.'+(ta>=8?' Con '+ta+'/20 alcanzarías '+(ta>=14?'la promoción':'la aprobación')+', pero hacen falta al menos 2 aciertos en cada una de las 4 partes.':'')+'</p>';
+    else if(ta<8) ver+='<p>Con '+ta+'/20 no se llega a 8 (aprobar).</p>'; }
+  $('app').innerHTML='<div class="pq-filtros pqs-resp"><div class="pq-flab">'+esc(simTit())+'</div><h2 class="pqs-h">Resultado</h2>'+ver+
+    '<table class="pqs-tab"><thead><tr><th>Parte</th><th>'+(real?'Aciertos':'Puntos')+'</th><th>'+(real?'Mínimo 2':'%')+'</th></tr></thead><tbody>'+filas+'</tbody></table>'+
+    (real?'<div class="pq-fnota">Aprobás con 8/20, promocionás con 14/20, siempre con al menos 2 aciertos en cada una de las 4 partes. El error no descuenta.</div>':'<div class="pq-fnota">Formato largo: puntos y porcentaje por parte. Las reglas de 8, 14 y mínimo 2 valen solo en el formato real.</div>')+
+    '<div class="pq-fpe"><button type="button" id="p2rv">Revisar pregunta por pregunta</button><button type="button" class="sec" id="p2nv">Nuevo simulacro</button><button type="button" class="sec" id="p2vl">Volver</button></div></div>';
+  $('rv').onclick=function(){ SM.pos=0; simRev() }; $('nv').onclick=function(){ simIniciar(SM.tam) }; $('vl').onclick=function(){ SM=null; inicio() };
+  window.scrollTo(0,0);
+}
+function simRev(){
+  modo='simrev'; document.body.classList.add('pqfull'); var it=SM.itens[SM.pos], n=SM.itens.length, p=simPts(it), cuerpo;
+  if(it.k==='mc'){ var q=it.q, ks=Object.keys(q.opts).sort();
+    cuerpo='<div class="pq-body'+(q.img?'':' pqs-b1')+'">'+(q.img?'<div class="pq-img"><img class="qimg" src="'+esc(q.img)+'" alt="Figura de la pregunta"></div>':'')+
+      '<div class="pq-qs"><div class="q"><label>'+(SM.pos+1)+'. '+esc(q.stem)+'</label></div>'+
+      ks.map(function(k){ var cl=k===q.ans?' ok':(k===it.r?' bad':''), nota=k===q.ans?q.expl:(q.nao&&q.nao[k]&&q.nao[k].nota);
+        return '<button type="button" class="op'+cl+'" disabled>'+(k===q.ans?'&#10003; ':'')+k+') '+esc(q.opts[k])+'</button>'+(nota?'<div class="base pqs-nota">'+(k===q.ans?'Explicación: ':'Por qué no: ')+esc(nota)+'</div>':'') }).join('')+
+      '<div class="base pq-origen">'+(it.r==null?'<b>En blanco.</b>':'Tu respuesta: <b>'+it.r+'</b> ('+(p.a?'correcta':'incorrecta')+').')+' Correcta: <b>'+q.ans+'</b> · '+esc(q.tp)+' · '+esc(q.topic||'')+' · '+esc(q.id||'')+'</div></div></div>';
+  } else { var x=it.x;
+    cuerpo='<div class="pq-body"><div class="pq-img"><img src="'+esc(x.img)+'" alt="Imagen del parcial" id="p2im"></div><div class="pq-qs">'+
+      it.ch.map(function(c,k){return '<div class="ch"><p>Choice '+(k+1)+'. '+esc(c.stem)+'</p>'+c.opts.map(function(o,j){ var cl=j===c.ans?' ok':(it.mc[k]===j?' bad':'');
+        return '<button type="button" class="op'+cl+'" disabled>'+(j===c.ans?'&#10003; ':'')+String.fromCharCode(65+j)+') '+esc(o)+'</button>'}).join('')+
+        '<div class="base">'+(it.mc[k]==null?'En blanco. ':'')+(c.expl?'Explicación: '+esc(c.expl)+' ':'')+(c.orig?'· Origen: '+esc(c.orig):'')+'</div></div>'}).join('')+
+      it.ps.map(function(pp,i){ var ok=certo(it.w[i],pp.aceitas)||it.contada[i];
+        return '<div class="q '+(ok?'ok':'bad')+'"><label>Escrita '+(i+1)+'. '+esc(pp.pergunta)+'</label><input value="'+esc(it.w[i])+'" readonly><div class="res">'+
+          (ok?'<b class="ok">'+(it.contada[i]?'Contada como correcta':'Correcto')+'</b>':'<b class="bad">Esperado:</b> '+esc(pp.aceitas[0])+' <button type="button" class="sec" data-ct="'+i+'">Contar como correcta</button>')+
+          (pp.aceitas.length>1?' <span class="base">(también: '+esc(pp.aceitas.slice(1).join(', '))+')</span>':'')+
+          '<div class="base">Fuente: «'+esc(pp.base)+'»'+(pp.de?' · '+esc(pp.de):'')+'</div></div></div>' }).join('')+
+      (x.origen?'<div class="base pq-origen"><b>Origen de la imagen:</b> '+esc(x.origen)+'</div>':'')+'</div></div>'; }
+  $('app').innerHTML='<div class="pq"><aside class="pq-side"><h2>'+esc(simTit())+' · revisión</h2><div class="pq-stats"><b>'+p.a+'</b>/'+p.t+' en esta pregunta</div>'+
+    '<div class="pq-lab">Preguntas</div><div class="pq-pills">'+simPills(true)+'</div><div class="pq-acts"><button type="button" data-a="res">Resultado</button><button type="button" data-a="sal">Salir</button></div></aside>'+
+    '<section class="pq-main"><div class="pq-card"><div class="pq-head"><span class="pq-tag">'+SIM_NOM[it.parte]+'</span><span class="pq-tag">Pregunta '+(SM.pos+1)+' de '+n+'</span></div>'+cuerpo+
+    '<div class="pq-kbd">&larr; &rarr; navegan · clic en la imagen para ampliar</div>'+
+    '<div class="pq-nav"><button type="button" class="sec" data-a="ant"'+(SM.pos?'':' disabled')+'>Anterior</button><button type="button" class="sec" data-a="sig"'+(SM.pos<n-1?'':' disabled')+'>Siguiente</button></div></div></section></div>';
+  if($('im')) $('im').onclick=function(){zoom(it.x.img)};
+  ROOT_Q('.pq-pills button').forEach(function(b){ b.onclick=function(){ SM.pos=+b.dataset.i; simRev() } });
+  ROOT_Q('[data-a]').forEach(function(b){ b.onclick=function(){ var a=b.dataset.a;
+    if(a==='ant'){ SM.pos--; simRev() } else if(a==='sig'){ SM.pos++; simRev() } else if(a==='res') simResultado(); else { SM=null; inicio() } } });
+  ROOT_Q('[data-ct]').forEach(function(b){ b.onclick=function(){ it.contada[+b.dataset.ct]=true; simRev() } });
+  var cur=ROOT_Q('.pq-pills .cur')[0]; if(cur&&cur.scrollIntoView) cur.scrollIntoView({block:'nearest'});
+}
+function simHome(){
+  $('app').insertAdjacentHTML('beforeend','<div class="pq-filtros pqs-home"><div class="pq-flab">Simulacro del 2º parcial</div>'+
+    '<div class="pqs-txt">Sin corrección durante la prueba. Cada materia: preguntas de teoría de las pruebas anteriores del 2º parcial, más una imagen con 2 choices y 3 escritas. Podés ir y volver y cambiar respuestas.</div>'+
+    '<div class="pq-fnota">Proporción por TP: Histología según HISTO TODOS 2020; Embriología según el 2º parcial de febrero 2021.</div>'+
+    '<div class="pq-fpe"><button type="button" data-sim="real">Formato real: 5+5 de teoría y 2 imágenes, nota sobre 20</button><button type="button" class="sec" data-sim="largo">Largo: 20+20 de teoría y 2 imágenes</button></div>'+
+    '<div class="pq-fnota">Formato real: aprobás con 8/20, promocionás con 14/20, siempre con al menos 2 aciertos en cada una de las 4 partes. El error no descuenta.</div></div>');
+  ROOT_Q('[data-sim]').forEach(function(b){ b.onclick=function(){ simIniciar(b.dataset.sim) } });
+}
+if(window.P2_BANCO) window.P2_SIM_ESTADO=function(){return SM};
+document.addEventListener('keydown',function(e){
+  if((modo!=='sim'&&modo!=='simrev')||e.ctrlKey||e.metaKey||e.altKey) return;
+  var z=document.getElementById('p2zoom'); if(e.key==='Escape'){ if(z) z.remove(); return } if(z) return;
+  if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+  var rev=modo==='simrev', it=SM.itens[SM.pos];
+  if(e.key==='ArrowRight'&&SM.pos<SM.itens.length-1){ e.preventDefault(); SM.pos++; SM.aviso=null; rev?simRev():simTela() }
+  else if(e.key==='ArrowLeft'&&SM.pos>0){ e.preventDefault(); SM.pos--; SM.aviso=null; rev?simRev():simTela() }
+  else if(!rev&&/^[a-eA-E]$/.test(e.key)){ var L=e.key.toUpperCase();
+    if(it.k==='mc'){ if(it.q.opts[L]!==undefined){ it.r=(it.r===L?null:L); simTela() } }
+    else { var j=L.charCodeAt(0)-65, c=it.mc[0]==null?0:(it.mc[1]==null?1:-1); if(c>=0&&j<it.ch[c].opts.length){ it.mc[c]=j; simTela() } } }
+});
 function fim(){
   modo=''; document.body.classList.remove('pqfull'); var k=contas();
   $('app').innerHTML='<div class="card"><h2>Escritas: '+k.e+' de '+k.et+' ('+pc(k.e,k.et)+') · Choices: '+k.c+' de '+k.ct+' ('+pc(k.c,k.ct)+')</h2><p class="sub">'+k.n+' de '+fila.length+' imágenes respondidas. En el parcial, cada imagen tiene 2 choices y 3 escritas (5 puntos), y hace falta al menos 2 por imagen.</p>'+
@@ -1673,6 +1997,12 @@ tab.addEventListener('click',function(){ save(); [vHome,vAuto,vQuiz,vRes].forEac
   tab.classList.add('active'); tab.setAttribute('aria-current','page'); window.scrollTo(0,0); });
 var _showImg=show;
 show=function(v){ ROOT.hidden=true; modo=''; document.body.classList.remove('pqfull'); var z=document.getElementById('p2zoom'); if(z) z.remove(); tab.classList.remove('active'); tab.setAttribute('aria-current','false'); _showImg(v); };
+window.P2_SIM=function(t){ tab.click(); simIniciar(t); };
+var _rh=renderHome; renderHome=function(){ _rh.apply(this,arguments); try{ p2Cartao() }catch(e){} };
+function p2Cartao(){ var b=document.querySelector('#viewHome .slide.sim'); if(!b||document.querySelector('.p2simcard')) return; var box=b.parentNode, d=document.createElement('div'); d.className='slide sim p2simcard'; d.setAttribute('role','group');
+  d.innerHTML='<span class="frost"><span class="tp">2P</span><span class="mat">imagen</span></span><span class="smear"><span class="topic">Simulacro del 2º parcial</span><span class="meta">Teoría + imagen, sin corrección hasta el final. Proporción por TP: Histología según HISTO TODOS 2020; Embriología según el 2º parcial de febrero 2021.</span>'+
+  '<button type="button" class="p2simgo" data-t="real">Formato real (nota sobre 20)</button><button type="button" class="p2simgo" data-t="largo">Largo (20+20)</button></span>'; box.appendChild(d); }
+document.addEventListener('click',function(e){ var c=e.target.closest&&e.target.closest('.p2simcard'); if(!c) return; e.stopPropagation(); var g=e.target.closest('.p2simgo'); if(g) window.P2_SIM(g.dataset.t); },true);
 })();
 /* ---------- fim imagenes parcial ---------- */
 (async function init(){

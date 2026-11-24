@@ -1096,19 +1096,21 @@ colunaDireita = function(q, given, answered){
   var i = h.indexOf('<span class="qid">');
   return i >= 0 ? h.slice(0, i) + extra + h.slice(i) : h.replace('</aside>', extra + '</aside>');
 };
-/* «Solo con imagen» ao lado do título de cada seção de Fijación (Vini, 23/11 noite): só questões com imagem no enunciado */
-var BOOT_IMG = {F1:false, F2:false};
-try{ var _bi = JSON.parse(localStorage.getItem('histo:fijacion:img')||'null'); if(_bi) BOOT_IMG = {F1:!!_bi.F1, F2:!!_bi.F2}; }catch(e){}
+/* «Solo con imagen» ao lado do título de cada seção (Vini, 23/11 noite): só questões com imagem no enunciado.
+   Fijación 1P/2P (F1/F2) e, depois, também Choices Cátedra 1P/2P (ciclos 1 e 2). Um botão por seção, guardado no navegador. */
+var IMG_SECAO = {'Choices Fijación 1P':'F1', 'Choices Cátedra 1P':'1', 'Choices Fijación 2P':'F2', 'Choices Cátedra 2P':'2'};
+var BOOT_IMG = {F1:false, F2:false, '1':false, '2':false};
+try{ var _bi = JSON.parse(localStorage.getItem('histo:fijacion:img')||'null'); if(_bi) Object.keys(BOOT_IMG).forEach(function(k){ BOOT_IMG[k] = !!_bi[k]; }); }catch(e){}
 function aplicaImgBoot(){
   GROUPS.forEach(function(g){
-    if(!g._bootAll) return;
-    var base = opt.tam==='curtas' ? g._bootAll.filter(curtaQ) : g._bootAll;
+    if(!(g.ciclo in BOOT_IMG)) return;
+    if(!g._qsTodas) g._qsTodas = g.qs;   // lista completa, a mesma que o filtro curtas usa; nunca é a filtrada
+    var base = opt.tam==='curtas' ? g._qsTodas.filter(curtaQ) : g._qsTodas;
     g.qs = BOOT_IMG[g.ciclo] ? base.filter(function(q){ return !!q.img; }) : base;
   });
 }
 var _aplicaTamBoot = aplicaTam;
 aplicaTam = function(){ _aplicaTamBoot(); aplicaImgBoot(); };
-aplicaImgBoot();
 (function(){ var st=document.createElement('style'); st.textContent=
   '.bootimg{font-family:var(--mono);font-size:11px;display:inline-flex;align-items:center;gap:7px;padding:4px 10px 4px 6px;border:1px solid var(--rule);border-radius:999px;background:var(--glass);color:var(--silver);cursor:pointer;white-space:nowrap;align-self:center}'+
   '.bootimg .sw{width:26px;height:15px;border-radius:999px;background:var(--rule);position:relative;transition:background .15s}'+
@@ -1118,18 +1120,19 @@ aplicaImgBoot();
   document.head.appendChild(st); })();
 var _renderHomeBoot = renderHome;
 renderHome = function(){
+  aplicaImgBoot();   // aqui, e não ao carregar: outros blocos ainda acrescentam questões aos grupos depois deste
   _renderHomeBoot();
   [].forEach.call(document.querySelectorAll('#deck .ciclo-head'), function(h){
-    var t = (h.querySelector('h2')||{}).textContent, c = t==='Choices Fijación 1P' ? 'F1' : t==='Choices Fijación 2P' ? 'F2' : null;
+    var c = IMG_SECAO[(h.querySelector('h2')||{}).textContent];
     if(!c) return;
-    var n = GROUPS.reduce(function(a,g){ return a + (g.ciclo===c ? g._bootAll.filter(function(q){ return !!q.img; }).length : 0); }, 0);
+    var n = GROUPS.reduce(function(a,g){ return a + (g.ciclo===c ? g._qsTodas.filter(function(q){ return !!q.img; }).length : 0); }, 0);
     var b = document.createElement('button'); b.type='button'; b.className='bootimg'; b.setAttribute('aria-pressed', String(BOOT_IMG[c]));
     b.title = 'Mostrar solo las preguntas con imagen en el enunciado ('+n+')';
     b.innerHTML = '<span class="sw" aria-hidden="true"></span>Solo con imagen';
     b.addEventListener('click', function(e){
       e.stopPropagation(); BOOT_IMG[c] = !BOOT_IMG[c];
       try{ localStorage.setItem('histo:fijacion:img', JSON.stringify(BOOT_IMG)); }catch(x){}
-      aplicaImgBoot(); renderHome();
+      renderHome();
     });
     h.insertBefore(b, h.querySelector('.rule'));
   });

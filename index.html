@@ -1075,13 +1075,14 @@ var BOOT = JSON.parse((document.getElementById('bootData')||{}).textContent||'[]
 BOOT.forEach(function(q,i){
   q._i=ALL.length+i; q._sk=stemKey('boot|'+q.stem+'|'+Object.values(q.opts).sort().join('|'));
   var key='F|'+q.tp+'|'+q.topic;
-  if(!gmap[key]){ gmap[key]={key:key, tp:q.tp, topic:q.topic, mat:q.mat, ciclo:'F', qs:[]}; GROUPS.push(gmap[key]); }
+  if(!gmap[key]){ gmap[key]={key:key, tp:q.tp, topic:q.topic, mat:q.mat, ciclo:(Number(q.tp.slice(2))<=12?'F1':'F2'), qs:[]}; GROUPS.push(gmap[key]); }
   gmap[key].qs.push(q);
 });
 ALL=ALL.concat(BOOT);
 var _cicloOrigBoot = cicloOrig, _cicloSecaoBoot = cicloSecao;
 cicloOrig = function(){ return opt.orig==='boot' ? 'F' : _cicloOrigBoot(); };
-cicloSecao = function(c){ return c==='F' ? 'F' : _cicloSecaoBoot(c); };
+// F1/F2 aparecem em «Todas», como o @apuntes; com «Fijación (Bootcamp)» ficam só elas
+cicloSecao = function(c){ return (c==='F1'||c==='F2') ? (opt.orig==='boot' ? 'F' : '') : _cicloSecaoBoot(c); };
 var _colunaBoot = colunaDireita;
 colunaDireita = function(q, given, answered){
   var h = _colunaBoot(q, given, answered);
@@ -1124,10 +1125,11 @@ function renderHome(){
   var cycles = [
     {id:'Y', name:'High Yield · relatos de final', sub:'temas que caíram no final · busca por texto'},
     {id:'H', name:'HISTO TODOS · 2º parcial 2020', sub:'só as questões do PDF · gabarito do Moodle'},
-    {id:'1', name:'Primeiro parcial', sub:'TP1 – TP12'},
-    {id:'2', name:'Segundo parcial',  sub:'TP13 – TP22'},
-    {id:'X', name:'Extra · Simulacro', sub:'@apuntes.medunlp'},
-    {id:'F', name:'Fijación · Bootcamp', sub:'Step 1 traducido · no son preguntas de la cátedra'}
+    {id:'F1', name:'Bootcamp 1P', sub:'Step 1 traducido · fijación, no son de la cátedra'},
+    {id:'1', name:'Choices Cátedra 1P', sub:'TP1 – TP12'},
+    {id:'F2', name:'Bootcamp 2P', sub:'Step 1 traducido · fijación, no son de la cátedra'},
+    {id:'2', name:'Choices Cátedra 2P',  sub:'TP13 – TP22'},
+    {id:'X', name:'Extra · Simulacro', sub:'@apuntes.medunlp'}
   ];
   var any=false;
 
@@ -1625,7 +1627,7 @@ async function pdfIA(g, qs, progresso){
 function secaoIA(){
   var gs = gruposIA(), sec = document.createElement('div'); sec.className='ciclo';
   if(!gs.length) return sec;
-  var nomes = {'1':'Primeiro parcial','2':'Segundo parcial','X':'Extra · Simulacro'}, opts = '', ciclo = null;
+  var nomes = {'F1':'Bootcamp 1P','1':'Choices Cátedra 1P','F2':'Bootcamp 2P','2':'Choices Cátedra 2P','X':'Extra · Simulacro'}, opts = '', ciclo = null;
   gs.forEach(function(g){
     if(g.ciclo!==ciclo){ if(ciclo!==null) opts += '</optgroup>'; ciclo=g.ciclo; opts += '<optgroup label="'+esc(nomes[ciclo]||ciclo)+'">'; }
     opts += '<option value="'+esc(g.key)+'">'+esc(g.tp+' · '+g.topic+' ('+questoesIA(g).length+')')+'</option>';

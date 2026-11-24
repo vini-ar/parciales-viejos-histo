@@ -1079,6 +1079,7 @@ BOOT.forEach(function(q,i){
   gmap[key].qs.push(q);
 });
 ALL=ALL.concat(BOOT);
+GROUPS.forEach(function(g){ if(g.ciclo==='F1'||g.ciclo==='F2'){ g._bootAll = g.qs; g._qsTodas = g.qs; } });  // _qsTodas já aqui: o filtro curtas não guarda a lista filtrada por imagem
 var _cicloOrigBoot = cicloOrig, _cicloSecaoBoot = cicloSecao;
 cicloOrig = function(){ return opt.orig==='boot' ? 'F' : _cicloOrigBoot(); };
 // F1/F2 aparecem em «Todas», como o @apuntes; com «Origem: Fijación» ficam só elas
@@ -1094,6 +1095,44 @@ colunaDireita = function(q, given, answered){
     (q.fig_leg ? '<figcaption>'+esc(q.fig_leg)+'</figcaption>' : '')+'</figure>';
   var i = h.indexOf('<span class="qid">');
   return i >= 0 ? h.slice(0, i) + extra + h.slice(i) : h.replace('</aside>', extra + '</aside>');
+};
+/* «Solo con imagen» ao lado do título de cada seção de Fijación (Vini, 23/11 noite): só questões com imagem no enunciado */
+var BOOT_IMG = {F1:false, F2:false};
+try{ var _bi = JSON.parse(localStorage.getItem('histo:fijacion:img')||'null'); if(_bi) BOOT_IMG = {F1:!!_bi.F1, F2:!!_bi.F2}; }catch(e){}
+function aplicaImgBoot(){
+  GROUPS.forEach(function(g){
+    if(!g._bootAll) return;
+    var base = opt.tam==='curtas' ? g._bootAll.filter(curtaQ) : g._bootAll;
+    g.qs = BOOT_IMG[g.ciclo] ? base.filter(function(q){ return !!q.img; }) : base;
+  });
+}
+var _aplicaTamBoot = aplicaTam;
+aplicaTam = function(){ _aplicaTamBoot(); aplicaImgBoot(); };
+aplicaImgBoot();
+(function(){ var st=document.createElement('style'); st.textContent=
+  '.bootimg{font-family:var(--mono);font-size:11px;display:inline-flex;align-items:center;gap:7px;padding:4px 10px 4px 6px;border:1px solid var(--rule);border-radius:999px;background:var(--glass);color:var(--silver);cursor:pointer;white-space:nowrap;align-self:center}'+
+  '.bootimg .sw{width:26px;height:15px;border-radius:999px;background:var(--rule);position:relative;transition:background .15s}'+
+  '.bootimg .sw:after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:#fff;transition:left .15s}'+
+  '.bootimg[aria-pressed="true"]{color:var(--hema);border-color:currentColor}'+
+  '.bootimg[aria-pressed="true"] .sw{background:currentColor}.bootimg[aria-pressed="true"] .sw:after{left:13px}';
+  document.head.appendChild(st); })();
+var _renderHomeBoot = renderHome;
+renderHome = function(){
+  _renderHomeBoot();
+  [].forEach.call(document.querySelectorAll('#deck .ciclo-head'), function(h){
+    var t = (h.querySelector('h2')||{}).textContent, c = t==='Choices Fijación 1P' ? 'F1' : t==='Choices Fijación 2P' ? 'F2' : null;
+    if(!c) return;
+    var n = GROUPS.reduce(function(a,g){ return a + (g.ciclo===c ? g._bootAll.filter(function(q){ return !!q.img; }).length : 0); }, 0);
+    var b = document.createElement('button'); b.type='button'; b.className='bootimg'; b.setAttribute('aria-pressed', String(BOOT_IMG[c]));
+    b.title = 'Mostrar solo las preguntas con imagen en el enunciado ('+n+')';
+    b.innerHTML = '<span class="sw" aria-hidden="true"></span>Solo con imagen';
+    b.addEventListener('click', function(e){
+      e.stopPropagation(); BOOT_IMG[c] = !BOOT_IMG[c];
+      try{ localStorage.setItem('histo:fijacion:img', JSON.stringify(BOOT_IMG)); }catch(x){}
+      aplicaImgBoot(); renderHome();
+    });
+    h.insertBefore(b, h.querySelector('.rule'));
+  });
 };
 /* ---------- fim bootcamp fijacion ---------- */
 

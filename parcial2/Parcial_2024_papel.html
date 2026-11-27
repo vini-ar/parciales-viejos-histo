@@ -65,7 +65,11 @@ button,.op,.risca{touch-action:manipulation;-webkit-tap-highlight-color:transpar
  body.umpor #navcel{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:9;gap:8px;align-items:center;
   background:var(--card);border-top:1px solid var(--bd);padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
  #navcel button{padding:14px 10px;font-size:16px}
- #navcel #navAnt{flex:0 0 72px}
+ body.umpor:not(.menu) header{display:none}
+ body.umpor main{padding-top:calc(6px + env(safe-area-inset-top))}
+ body.umpor.menu #navMenu{background:var(--ac);border-color:var(--ac);color:#fff}
+ #navcel #navMenu{flex:0 0 64px;font-size:14px;padding:14px 4px}
+ #navcel #navAnt{flex:0 0 52px}
  #navcel #navSig{flex:1;background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
  #navcel #navNum{flex:none;min-width:64px;text-align:center;font-size:14px;color:var(--mut)}
  #navcel button:disabled{opacity:.35}
@@ -184,7 +188,7 @@ function render(){
   document.getElementById('prog').textContent='Respondidas '+resp.length+'/'+QS.length+' · aciertos '+ok;
 }
 try{render()}catch(e){est={modo:'prueba',hoja:'todas',soloErr:false,res:{},risc:{},bloco:null};guardar();render()}
-</script><div id="navcel"><button id="navAnt" type="button" aria-label="Anterior">‹</button>
+</script><div id="navcel"><button id="navMenu" type="button">Menú</button><button id="navAnt" type="button" aria-label="Anterior">‹</button>
 <span id="navNum"></span><button id="navSig" type="button">Siguiente ›</button></div>
 <script>
 (function(){
@@ -204,10 +208,11 @@ try{render()}catch(e){est={modo:'prueba',hoja:'todas',soloErr:false,res:{},risc:
   s.textContent=i===cs.length-1?"Fin":"Siguiente ›";
  }
  function ir(d){const cs=cards(),i=cs.findIndex(c=>c.dataset.id===atual),n=i+d;
-  if(n<0||n>=cs.length)return;atual=cs[n].dataset.id;mostrar();
+  if(n<0||n>=cs.length)return;atual=cs[n].dataset.id;document.body.classList.remove("menu");mostrar();
   const top=document.getElementById("lista").getBoundingClientRect().top+scrollY-4;
   scrollTo({top:Math.max(0,top),behavior:"instant"})}
  const r0=render;render=function(){r0.apply(this,arguments);mostrar()};
+ document.getElementById("navMenu").onclick=()=>{document.body.classList.toggle("menu");scrollTo({top:0,behavior:"instant"})};
  document.getElementById("navAnt").onclick=()=>ir(-1);
  document.getElementById("navSig").onclick=()=>ir(1);
  let x0=null,y0=0;const L=document.getElementById("lista");

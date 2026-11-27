@@ -105,7 +105,25 @@ kbd{font:600 11px/1 ui-monospace,Menlo,monospace;padding:3px 6px;border-radius:5
 </header>
 
 <main>
-<section id="menu"><div id="cards"></div></section>
+<section id="menu"><div id="offline" style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0 0 14px;font-size:14px">
+<b>Usar sin internet</b>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+<button class="btn p" id="offBtn" type="button">Guardar en este celular</button>
+<a class="btn" href="Imagenes_cobradas_offline.html" download="Imagenes_cobradas_offline.html" style="text-decoration:none">Descargar archivo (20 MB)</a>
+</div>
+<div id="offMsg" style="color:var(--sub);margin-top:6px">«Guardar» deja la página y las 97 imágenes en el navegador: después abrí este mismo link sin internet. «Descargar» baja un archivo único para abrir en la computadora o en Android.</div>
+</div>
+<script>
+(function(){const b=document.getElementById("offBtn"),m=document.getElementById("offMsg");
+if(!("serviceWorker" in navigator)){b.disabled=true;m.textContent="Este navegador no permite guardar; usá «Descargar archivo».";return;}
+navigator.serviceWorker.register("sw_imagenes_cobradas.js").catch(()=>{});
+const L=["Imagenes_cobradas.html", "../telao_campos/08_00.jpg", "../telao_campos/08_01.jpg", "../telao_campos/08_02.jpg", "../telao_campos/08_04.jpg", "../telao_campos/08_05.jpg", "../telao_campos/09_00.jpg", "../telao_campos/09_03.jpg", "../telao_campos/09_m0.jpg", "../telao_campos/09_m1.jpg", "../telao_campos/09_m2.jpg", "../telao_campos/09_m3.jpg", "imagens/cobradas/18-p06.png", "imagens/cobradas/18-p34.png", "imagens/cobradas/18-p35.png", "imagens/cobradas/25-p05.png", "imagens/cobradas/25-p26.png", "imagens/cobradas/25-p36.png", "imagens/cobradas/25-p38.png", "imagens/cobradas/25-p48.png", "imagens/cobradas/25-p54.png", "imagens/cobradas/25-p66.png", "imagens/cobradas/h15-p38.png", "imagens/cobradas/h16-p42.png", "imagens/cobradas/h17-p21.png", "imagens/cobradas/h20-p23.png", "imagens/cobradas/h20-p33.png", "imagens/cobradas/h21-p105.png", "imagens/cobradas/h21-p33.png", "imagens/cobradas/h21-p52.png", "imagens/cobradas/h21-p82.png", "imagens/cobradas/h24-p12.png", "imagens/cobradas/piel-p59.png", "imagens/cobradas/t17-p51.png", "imagens/cobradas/t17-p52.png", "imagens/macro/m01a.jpg", "imagens/macro/m01b.jpg", "imagens/macro/m02.jpg", "imagens/macro/m03.jpg", "imagens/macro/m04.jpg", "imagens/macro/m05.jpg", "imagens/macro/m06.jpg", "imagens/macro/m07.jpg", "imagens/macro/m08.jpg", "imagens/macro/m09.jpg", "imagens/macro/m10.jpg", "imagens/macro/m11.jpg", "imagens/macro/m12.jpg", "imagens/macro/m13.jpg", "imagens/macro/m14.jpg", "imagens/macro/m15.jpg", "imagens/macro/m16.jpg", "imagens/macro/m17.jpg", "imagens/macro/m18.jpg", "imagens/macro/m19.jpg", "imagens/macro/m20.jpg", "imagens/macro/m21.jpg", "imagens/macro/m22.jpg", "imagens/macro/m23.jpg", "imagens/macro/m24.jpg", "imagens/macro/m25.jpg", "imagens/macro/m26.jpg", "imagens/macro/m27.jpg", "imagens/macro/m28.jpg", "imagens/macro/m29.jpg", "imagens/macro/m30.jpg", "imagens/macro/m31.jpg", "imagens/macro/m32a.jpg", "imagens/macro/m32b.jpg", "imagens/macro/m33.jpg", "imagens/macro/m34.jpg", "imagens/macro_ref/14_respiratorio_p24.jpg", "imagens/macro_ref/14_respiratorio_p41.jpg", "imagens/macro_ref/15_digestivo1_p32.jpg", "imagens/macro_ref/16_digestivo2_p42.jpg", "imagens/macro_ref/16_digestivo2_p61.jpg", "imagens/macro_ref/17_anexas_p15.jpg", "imagens/macro_ref/17_anexas_p32.jpg", "imagens/macro_ref/17_anexas_p41.jpg", "imagens/macro_ref/17_anexas_p52.jpg", "imagens/macro_ref/17_anexas_p64.jpg", "imagens/macro_ref/19_urinario_p25.jpg", "imagens/macro_ref/19_urinario_p87.jpg", "imagens/macro_ref/20_endocrino_p20.jpg", "imagens/macro_ref/20_endocrino_p33.jpg", "imagens/macro_ref/20_endocrino_p36.jpg", "imagens/macro_ref/20_endocrino_p49.jpg", "imagens/macro_ref/21_ovario_p33.jpg", "imagens/macro_ref/21_ovario_p92.jpg", "imagens/macro_ref/22_femenino2_p32.jpg", "imagens/macro_ref/23_utero_p24.jpg", "imagens/macro_ref/23_utero_p43.jpg", "imagens/macro_ref/24_masculino_p12.jpg", "imagens/macro_ref/24_masculino_p36.jpg", "imagens/macro_ref/24_masculino_p42.jpg", "imagens/macro_ref/26_tegumento_p16.jpg", "imagens/macro_ref/26_tegumento_p37.jpg", "imagens/macro_ref/26_tegumento_p59.jpg"];
+b.onclick=async()=>{b.disabled=true;try{const c=await caches.open("imgcobradas-7d464ebb8f");let k=0;
+for(const u of L){await c.add(new Request(u,{cache:"reload"}));k++;m.textContent="Guardando… "+Math.round(k/L.length*100)+"%";}
+m.textContent="Listo: guardado en este celular ("+L.length+" archivos). Abrí este link aunque no tengas internet.";}
+catch(e){m.textContent="No se pudo guardar todo ("+e+"). Probá de nuevo con internet.";}b.disabled=false;};})();
+</script>
+<div id="cards"></div></section>
 <section id="m1" class="grid">
   <div class="card"><div class="fig" id="f1"></div></div>
   <div class="card">
@@ -324,6 +342,40 @@ document.addEventListener("keydown",ev=>{
  else if(atual===2&&k==="enter"){ev.preventDefault();corrigido?seguir2():foco2();}
 });
 chips();addEventListener("hashchange",rota);rota();
+</script>
+<style>
+body.cel:not(.enMenu) .ttl{display:none}
+body.cel:not(.enMenu) header .hwrap{padding:6px 12px;gap:8px;flex-wrap:nowrap}
+body.cel:not(.enMenu) .volver{padding:6px 10px}
+body.cel:not(.enMenu) .tabs{width:auto;margin-left:auto}
+body.cel.mac .tabs{display:none}
+body.cel main{padding:8px 10px 96px}
+body.cel #m1{display:flex;flex-direction:column;gap:8px}
+body.cel #m1>.card:last-child{display:contents}
+body.cel #m1 .prog{order:0;margin:0}
+body.cel #m1 #a1{order:1;margin:0;font-size:20px;padding:8px 12px;cursor:pointer}
+body.cel #m1>.card:first-child{order:2;padding:6px}
+body.cel #p1,body.cel #k1,body.cel #m1 .keys,body.cel #mn,body.cel #src,body.cel .btn.s.full{display:none!important}
+body.cel #m1 .btns{position:fixed;left:0;right:0;bottom:0;z-index:9;background:var(--bg);border-top:1px solid var(--line);
+ padding:10px 12px calc(10px + env(safe-area-inset-bottom));margin:0}
+body.cel #m1 .btns .btn{padding:16px 10px;font-size:17px}
+body.cel:not(.rev) #m1 .btns .btn.r,body.cel:not(.rev) #m1 .btns .btn.g{display:none}
+body.cel.rev #m1 .btns .btn.p{display:none}
+body.cel #m2 .btns{position:sticky;bottom:0}
+</style>
+<script>
+(function(){
+ const mq=matchMedia("(max-width:820px) and (pointer:coarse)");
+ const sync=()=>{const c=mq.matches;document.body.classList.toggle("cel",c);
+  try{document.body.classList.toggle("rev",c&&aberto&&sel>=0);document.body.classList.toggle("mac",ehMac())}catch(e){}};
+ ["mostrar","marcar","escolher","proximo","ini1","desfazer","modo"].forEach(n=>{const f=window[n];
+  if(typeof f==="function")window[n]=function(){const r=f.apply(this,arguments);sync();return r}});
+ const bR=document.querySelector("#m1 .btn.r"),bG=document.querySelector("#m1 .btn.g");
+ const rot=(b,t)=>{if(b&&mq.matches){b.firstChild.textContent=t+" "}};
+ rot(bR,"Errado");rot(bG,"Certo");
+ document.getElementById("a1").addEventListener("click",()=>{if(!aberto)mostrar()});
+ addEventListener("hashchange",()=>setTimeout(sync,0));mq.addEventListener("change",sync);sync();
+})();
 </script>
 </body>
 </html>

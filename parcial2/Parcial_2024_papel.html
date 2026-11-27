@@ -48,7 +48,9 @@ button,.op,.risca{touch-action:manipulation;-webkit-tap-highlight-color:transpar
  .barra{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 12px}
  .barra::-webkit-scrollbar{display:none}
  .barra button{flex:none;white-space:nowrap;padding:8px 12px}
- #modos .prog{order:-1;flex:none;margin:0 6px 0 0;white-space:nowrap}
+ #modos{flex-wrap:wrap;overflow:visible;gap:6px}
+ #modos button{flex:1 1 auto;padding:10px 8px}
+ #modos .prog{order:-1;flex:1 0 100%;margin:0;white-space:nowrap}
  main{padding:6px 8px calc(40px + env(safe-area-inset-bottom))}
  .q{padding:12px 10px;margin:10px 0;border-radius:10px}
  .stem{font-size:16px;line-height:1.4}
@@ -65,7 +67,7 @@ button,.op,.risca{touch-action:manipulation;-webkit-tap-highlight-color:transpar
 <header>
 <h1>2º parcial en papel 2024 · Histología y Embriología</h1>
 <div class="barra" id="modos">
-<button data-m="estudiar">Estudiar (todo a la vista)</button>
+<button data-m="estudiar">Estudiar (ver todo)</button>
 <button data-m="prueba">Ponerse a prueba</button>
 <button class="bloco-btn" id="reset" onclick="try{localStorage.removeItem('parcial2024_papel_v1')}catch(e){};location.reload()">Reset</button>
 <span class="prog" id="prog"></span>
@@ -77,7 +79,7 @@ button,.op,.risca{touch-action:manipulation;-webkit-tap-highlight-color:transpar
 <script>
 const QS=JSON.parse(document.getElementById('dados').textContent);
 const CH='parcial2024_papel_v1';
-let est={modo:'estudiar',hoja:'todas',soloErr:false,res:{},risc:{},bloco:null};
+let est={modo:'prueba',hoja:'todas',soloErr:false,res:{},risc:{},bloco:null};
 try{const s=JSON.parse(localStorage.getItem(CH)||'{}')||{};
   if(s.modo==='estudiar'||s.modo==='prueba')est.modo=s.modo;
   if(typeof s.hoja==='string'&&(s.hoja==='todas'||QS.some(q=>q.hoja===s.hoja)))est.hoja=s.hoja;
@@ -169,5 +171,5 @@ function render(){
   const resp=QS.filter(q=>est.res[q.id]!=null),ok=resp.filter(q=>est.res[q.id]===q.ans).length;
   document.getElementById('prog').textContent='Respondidas '+resp.length+'/'+QS.length+' · aciertos '+ok;
 }
-try{render()}catch(e){est={modo:'estudiar',hoja:'todas',soloErr:false,res:{},risc:{},bloco:null};guardar();render()}
+try{render()}catch(e){est={modo:'prueba',hoja:'todas',soloErr:false,res:{},risc:{},bloco:null};guardar();render()}
 </script></body></html>

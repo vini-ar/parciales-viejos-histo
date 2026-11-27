@@ -344,6 +344,8 @@ body.cel #m1 .btns .btn{padding:16px 10px;font-size:17px}
 body.cel:not(.rev) #m1 .btns .btn.r,body.cel:not(.rev) #m1 .btns .btn.g{display:none}
 body.cel.rev #m1 .btns .btn.p{display:none}
 body.cel #m2 .btns{position:sticky;bottom:0}
+body:not(.fim) #azar2{display:none!important}
+body.fim #m1 .btns .btn.p:not(#azar2),body.fim #m1 .btns .btn.r,body.fim #m1 .btns .btn.g{display:none!important}
 </style>
 <script>
 (function(){
@@ -357,6 +359,21 @@ body.cel #m2 .btns{position:sticky;bottom:0}
  rot(bR,"Errado");rot(bG,"Certo");
  document.getElementById("a1").addEventListener("click",()=>{if(!aberto)mostrar()});
  addEventListener("hashchange",()=>setTimeout(sync,0));mq.addEventListener("change",sync);sync();
+})();
+// Imagens em ordem aleatória (pedido de Vini, 27/11): fila embaralhada sem repetir até passar por todas.
+(function(){
+ let fila=[];
+ const embaralha=()=>{fila=LISTA.map((_,i)=>i);for(let i=fila.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fila[i],fila[j]]=[fila[j],fila[i]]}};
+ const atual=()=>{const f=new URLSearchParams(location.hash.slice(1)).get("f");return f===null?-1:+f};
+ window.azar=function(){if(!fila.length)embaralha();let i=fila.pop();if(i===atual()&&LISTA.length>1){if(!fila.length)embaralha();i=fila.pop()}
+  location.hash="f="+i+"&m=1";};
+ const m=document.getElementById("menu");
+ m.insertAdjacentHTML("afterbegin",'<button class="btn p" type="button" onclick="azar()" style="width:100%;margin:0 0 12px">Imagen al azar</button>');
+ const bt=document.querySelector("#m1 .btns");
+ bt.insertAdjacentHTML("beforeend",'<button class="btn p full" id="azar2" type="button" onclick="azar()">Otra imagen al azar</button>');
+ const fim=()=>{let f=false;try{f=st.length>0&&st.every(s=>s>=2)}catch(e){}document.body.classList.toggle("fim",f)};
+ ["marcar","proximo","ini1","desfazer","modo"].forEach(n=>{const g=window[n];if(typeof g==="function")window[n]=function(){const r=g.apply(this,arguments);fim();return r}});
+ addEventListener("hashchange",()=>setTimeout(fim,0));fim();
 })();
 </script>
 </body>

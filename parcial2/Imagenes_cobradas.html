@@ -118,7 +118,7 @@ kbd{font:600 11px/1 ui-monospace,Menlo,monospace;padding:3px 6px;border-radius:5
 if(!("serviceWorker" in navigator)){b.disabled=true;m.textContent="Este navegador no permite guardar; usá «Descargar archivo».";return;}
 navigator.serviceWorker.register("sw_imagenes_cobradas.js").catch(()=>{});
 const L=["Imagenes_cobradas.html", "../telao_campos/08_00.jpg", "../telao_campos/08_01.jpg", "../telao_campos/08_02.jpg", "../telao_campos/08_04.jpg", "../telao_campos/08_05.jpg", "../telao_campos/09_00.jpg", "../telao_campos/09_03.jpg", "../telao_campos/09_m0.jpg", "../telao_campos/09_m1.jpg", "../telao_campos/09_m2.jpg", "../telao_campos/09_m3.jpg", "imagens/cobradas/18-p06.png", "imagens/cobradas/18-p34.png", "imagens/cobradas/18-p35.png", "imagens/cobradas/25-p05.png", "imagens/cobradas/25-p26.png", "imagens/cobradas/25-p36.png", "imagens/cobradas/25-p38.png", "imagens/cobradas/25-p48.png", "imagens/cobradas/25-p54.png", "imagens/cobradas/25-p66.png", "imagens/cobradas/h15-p38.png", "imagens/cobradas/h16-p42.png", "imagens/cobradas/h17-p21.png", "imagens/cobradas/h20-p23.png", "imagens/cobradas/h20-p33.png", "imagens/cobradas/h21-p105.png", "imagens/cobradas/h21-p33.png", "imagens/cobradas/h21-p52.png", "imagens/cobradas/h21-p82.png", "imagens/cobradas/h24-p12.png", "imagens/cobradas/piel-p59.png", "imagens/cobradas/t17-p51.png", "imagens/cobradas/t17-p52.png", "imagens/macro/m01a.jpg", "imagens/macro/m01b.jpg", "imagens/macro/m02.jpg", "imagens/macro/m03.jpg", "imagens/macro/m04.jpg", "imagens/macro/m05.jpg", "imagens/macro/m06.jpg", "imagens/macro/m07.jpg", "imagens/macro/m08.jpg", "imagens/macro/m09.jpg", "imagens/macro/m10.jpg", "imagens/macro/m11.jpg", "imagens/macro/m12.jpg", "imagens/macro/m13.jpg", "imagens/macro/m14.jpg", "imagens/macro/m15.jpg", "imagens/macro/m16.jpg", "imagens/macro/m17.jpg", "imagens/macro/m18.jpg", "imagens/macro/m19.jpg", "imagens/macro/m20.jpg", "imagens/macro/m21.jpg", "imagens/macro/m22.jpg", "imagens/macro/m23.jpg", "imagens/macro/m24.jpg", "imagens/macro/m25.jpg", "imagens/macro/m26.jpg", "imagens/macro/m27.jpg", "imagens/macro/m28.jpg", "imagens/macro/m29.jpg", "imagens/macro/m30.jpg", "imagens/macro/m31.jpg", "imagens/macro/m32a.jpg", "imagens/macro/m32b.jpg", "imagens/macro/m33.jpg", "imagens/macro/m34.jpg", "imagens/macro_ref/14_respiratorio_p24.jpg", "imagens/macro_ref/14_respiratorio_p41.jpg", "imagens/macro_ref/15_digestivo1_p32.jpg", "imagens/macro_ref/16_digestivo2_p42.jpg", "imagens/macro_ref/16_digestivo2_p61.jpg", "imagens/macro_ref/17_anexas_p15.jpg", "imagens/macro_ref/17_anexas_p32.jpg", "imagens/macro_ref/17_anexas_p41.jpg", "imagens/macro_ref/17_anexas_p52.jpg", "imagens/macro_ref/17_anexas_p64.jpg", "imagens/macro_ref/19_urinario_p25.jpg", "imagens/macro_ref/19_urinario_p87.jpg", "imagens/macro_ref/20_endocrino_p20.jpg", "imagens/macro_ref/20_endocrino_p33.jpg", "imagens/macro_ref/20_endocrino_p36.jpg", "imagens/macro_ref/20_endocrino_p49.jpg", "imagens/macro_ref/21_ovario_p33.jpg", "imagens/macro_ref/21_ovario_p92.jpg", "imagens/macro_ref/22_femenino2_p32.jpg", "imagens/macro_ref/23_utero_p24.jpg", "imagens/macro_ref/23_utero_p43.jpg", "imagens/macro_ref/24_masculino_p12.jpg", "imagens/macro_ref/24_masculino_p36.jpg", "imagens/macro_ref/24_masculino_p42.jpg", "imagens/macro_ref/26_tegumento_p16.jpg", "imagens/macro_ref/26_tegumento_p37.jpg", "imagens/macro_ref/26_tegumento_p59.jpg"];
-b.onclick=async()=>{b.disabled=true;try{const c=await caches.open("imgcobradas-7d464ebb8f");let k=0;
+b.onclick=async()=>{b.disabled=true;try{const c=await caches.open("imgcobradas-7dfa388876");let k=0;
 for(const u of L){await c.add(new Request(u,{cache:"reload"}));k++;m.textContent="Guardando… "+Math.round(k/L.length*100)+"%";}
 m.textContent="Listo: guardado en este celular ("+L.length+" archivos). Abrí este link aunque no tengas internet.";}
 catch(e){m.textContent="No se pudo guardar todo ("+e+"). Probá de nuevo con internet.";}b.disabled=false;};})();
@@ -362,6 +362,8 @@ body.cel #m1 .btns .btn{padding:16px 10px;font-size:17px}
 body.cel:not(.rev) #m1 .btns .btn.r,body.cel:not(.rev) #m1 .btns .btn.g{display:none}
 body.cel.rev #m1 .btns .btn.p{display:none}
 body.cel #m2 .btns{position:sticky;bottom:0}
+body:not(.fim) #azar2{display:none!important}
+body.fim #m1 .btns .btn.p:not(#azar2),body.fim #m1 .btns .btn.r,body.fim #m1 .btns .btn.g{display:none!important}
 </style>
 <script>
 (function(){
@@ -375,6 +377,21 @@ body.cel #m2 .btns{position:sticky;bottom:0}
  rot(bR,"Errado");rot(bG,"Certo");
  document.getElementById("a1").addEventListener("click",()=>{if(!aberto)mostrar()});
  addEventListener("hashchange",()=>setTimeout(sync,0));mq.addEventListener("change",sync);sync();
+})();
+// Imagens em ordem aleatória (pedido de Vini, 27/11): fila embaralhada sem repetir até passar por todas.
+(function(){
+ let fila=[];
+ const embaralha=()=>{fila=LISTA.map((_,i)=>i);for(let i=fila.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fila[i],fila[j]]=[fila[j],fila[i]]}};
+ const atual=()=>{const f=new URLSearchParams(location.hash.slice(1)).get("f");return f===null?-1:+f};
+ window.azar=function(){if(!fila.length)embaralha();let i=fila.pop();if(i===atual()&&LISTA.length>1){if(!fila.length)embaralha();i=fila.pop()}
+  location.hash="f="+i+"&m=1";};
+ const m=document.getElementById("menu");
+ m.insertAdjacentHTML("afterbegin",'<button class="btn p" type="button" onclick="azar()" style="width:100%;margin:0 0 12px">Imagen al azar</button>');
+ const bt=document.querySelector("#m1 .btns");
+ bt.insertAdjacentHTML("beforeend",'<button class="btn p full" id="azar2" type="button" onclick="azar()">Otra imagen al azar</button>');
+ const fim=()=>{let f=false;try{f=st.length>0&&st.every(s=>s>=2)}catch(e){}document.body.classList.toggle("fim",f)};
+ ["marcar","proximo","ini1","desfazer","modo"].forEach(n=>{const g=window[n];if(typeof g==="function")window[n]=function(){const r=g.apply(this,arguments);fim();return r}});
+ addEventListener("hashchange",()=>setTimeout(fim,0));fim();
 })();
 </script>
 </body>
